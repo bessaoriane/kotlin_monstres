@@ -1,5 +1,7 @@
 package monstres
 
+import java.io.File
+
 /**
 * Représente un entraîneur dans le contexte du jeu.
 *
