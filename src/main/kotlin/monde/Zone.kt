@@ -7,8 +7,16 @@ class Zone(
     var nom : String,
     var expZone : Int,
     var especesMonstres : MutableList<EspeceMonstres> = mutableListOf(),
-    var zoneSuivante : Zone?,
-    var zonePrecedante : Zone?
+    var zoneSuivante : Zone?=null,
+    var zonePrecedante : Zone?=null
+){
+    fun genererMonstre(){
 
-)
+    }
+
+    fun rancontreMonstre(){
+
+
+  }
+}
 
