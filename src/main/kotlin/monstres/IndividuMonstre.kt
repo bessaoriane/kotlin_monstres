@@ -7,7 +7,7 @@ import kotlin.math.roundToInt
 
 class IndividuMonstre(
     val id: Int,
-    val nom: String,
+    var nom: String,
     val espece: EspeceMonstres,
     var entraineur: Entraineur?=null,
     val expInit: Double
@@ -36,6 +36,9 @@ class IndividuMonstre(
             field=nouveauPv
         }
 
+    init {
+        this.exp = expInit // applique le setter et déclenche un éventuel level-up
+    }
 
     /**
      * Calcule l'expérience totale nécessaire pour atteindre un niveau donné.
@@ -64,6 +67,103 @@ class IndividuMonstre(
 
     }
 
+    /**
+     * Attaque un autre [IndividuMonstre] et inflige des dégâts.
+     *
+     * Les dégâts sont calculés de manière très simple pour le moment :
+     * `dégâts = attaque - (défense / 2)` (minimum 1 dégât).
+     *
+     * @param cible Monstre cible de l'attaque.
+     */
+
+    fun attaquer(cible: IndividuMonstre) {
+        val degatBrut = this.attaque
+
+        var degatTotal = degatBrut - (cible.defense / 2)
+
+        if (degatTotal < 1) {
+            degatTotal = 1
+        }
+
+        val pvAvant = cible.pv
+
+        cible.pv -= degatTotal
+
+        val pvApres = cible.pv
+
+        println("${this.nom} inflige ${pvAvant - pvApres} dégâts à ${cible.nom}.")
+    }
+
+    /**
+     * Demande au joueur de renommer le monstre.
+     * Si l'utilisateur entre un texte vide, le nom n'est pas modifié.
+     */
+    fun renommer() {
+        println("Renommer $nom ?")
+        val nouveauNom = readln()
+
+        if (nouveauNom.isNotEmpty()) {
+            nom = nouveauNom
+        }
+    }
+
+    fun afficheDetail() {
+        // Récupérer l'art ASCII
+        val art = espece.afficheArt()
+        println(espece.afficheArt())
+        // Découper l'art en lignes
+        val artLines = art.split("\n")
+
+        // Construire la liste des caractéristiques
+        val details = listOf(
+            "Nom : $nom",
+            "Niveau : $niveau",
+            "PV : $pv / $pvMax",
+            "Attaque : $attaque",
+            "Défense : $defense",
+            "Vitesse : $vitesse",
+            "Attaque spéciale : $attaqueSpe",
+            "Défense spéciale : $defenseSpe",
+            "Potentiel : $potentiel",
+            "Expérience : $exp"
+        )
+
+        // Trouver la largeur maximale de l'art
+        var maxArtWidth = 0
+
+        for (artLine in artLines) {
+            if (artLine.length > maxArtWidth) {
+                maxArtWidth = artLine.length
+            }
+        }
+
+        // Nombre maximal de lignes à afficher
+        val maxLines = maxOf(artLines.size, details.size)
+
+        // Afficher l'art et les détails
+        for (i in 0 until maxLines) {
+
+            // Récupérer la ligne de l'art
+            val artLine = if (i < artLines.size) {
+                artLines[i]
+            } else {
+                ""
+            }
+
+            // Récupérer la ligne de détail
+            val detailLine = if (i < details.size) {
+                details[i]
+            } else {
+                ""
+            }
+
+            // Ajouter des espaces après l'art
+            val paddedArt = artLine.padEnd(maxArtWidth + 4)
+
+            // Afficher
+            println( detailLine)
+        }
+    }
 }
 
 

@@ -1,6 +1,7 @@
 import dresseur.Entraineur
 import monde.Zone
 import monstres.EspeceMonstres
+import monstres.IndividuMonstre
 
 var joueur = Entraineur(1, "Sacha", 100)
 var rival = Entraineur(2, "Regis", 200)
@@ -91,6 +92,13 @@ var especeLaoumi = EspeceMonstres(
 
 
 fun main() {
+
+    val monstre1 = IndividuMonstre(1, "springleaf", expInit = 1500.0, espece = especeSpringleaf)
+    val monstre2 = IndividuMonstre(2, "flamkip", expInit = 1500.0, espece = especeFlamkip)
+    val monstre3 = IndividuMonstre(3, "aquamy", expInit = 1500.0, espece = especeAquamy)
+
+    monstre1.afficheDetail()
+
     val route1 = Zone(
         id = 1,
         nom = "Route 1",
@@ -102,6 +110,7 @@ fun main() {
         nom = "Route 2",
         especesMonstres = mutableListOf(especeLaoumi, especeAquamy),
         expZone = 400
+
     )
 
 
