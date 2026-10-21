@@ -1,0 +1,4 @@
+package jeu
+
+class CombatMonstre {
+}

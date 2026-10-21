@@ -36,6 +36,8 @@ class MonsterKube(
             }
 
             cible.entraineur = joueur
+
+            return true
         } else {
             println("Presque ! Le Kube n'a pas pu capturer le monstre !")
             return false
