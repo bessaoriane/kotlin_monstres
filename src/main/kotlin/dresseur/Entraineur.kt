@@ -1,5 +1,6 @@
 package dresseur
 
+import item.Item
 import monstres.IndividuMonstre
 
 /**
@@ -19,7 +20,7 @@ class Entraineur(
     var argents:Int,
     var equipeMonstre: MutableList<IndividuMonstre> = mutableListOf(),
     var boiteMonstre: MutableList<IndividuMonstre> = mutableListOf(),
-    //TODO sacAKube
+    var sacAItems: MutableList<Item> = mutableListOf()
 
 ) {
     /**
